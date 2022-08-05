@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>topological_bayes_filter</name>
+    <version>1.0.0</version>
+    <description>
+        The topological_bayes_filter package.
+    </description>
+
+    <author>David Dubach</author>
+    <maintainer email="dubachd@ethz.ch">David Dubach</maintainer>
+
+    <license>MIT</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_export_depend>eigen</build_export_depend>
+
+</package>
