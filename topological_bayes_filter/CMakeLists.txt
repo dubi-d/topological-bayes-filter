@@ -37,6 +37,8 @@ add_library(${PROJECT_NAME}
         src/topological_bayes_filter.cpp
         )
 
+add_executable(tbf_example src/tbf_example.cpp)
+
 ## Add dependencies to exported targets, like ROS msgs or srvs
 #add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
@@ -45,3 +47,6 @@ target_link_libraries(${PROJECT_NAME}
         ${catkin_LIBRARIES}
         Eigen3::Eigen
         )
+
+target_link_libraries(tbf_example
+        ${PROJECT_NAME})
