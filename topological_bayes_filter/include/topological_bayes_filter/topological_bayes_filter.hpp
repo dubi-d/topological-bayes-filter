@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 #include <Eigen/Core>
 
@@ -7,24 +8,25 @@ namespace topological_bayes_filter{
 class TopoBayesFilter {
 
 public:
-    TopoBayesFilter(std::size_t numVertices);  //! Constructor
+    TopoBayesFilter(std::size_t numVertices, double transitionProbability);  //! Constructor
     ~TopoBayesFilter(){}; //! Destructor
 
-    void addEdge(int i, int j);
-    void reset();
-    void update();
-    int getEstimate();
-
+    virtual void addEdge(int i, int j);
+    virtual void reset();
+    virtual void update();
+    virtual int getEstimate();
 
 protected:
-    void propagate();
-    void sense();
-    void updatePosterior();
+    virtual void propagate();
+    virtual void sense();
+    virtual void updatePosterior();
 
     std::size_t numVertices_;
+    double transitionProbability_;
+
     std::vector<std::vector<int>> adjacencyList_;
-    std::vector<double> prior_;
-    std::vector<double> posterior_;
+    Eigen::VectorXd prior_;
+    Eigen::VectorXd posterior_;
 };
 
 }  // end of namespace topological_bayes_filter
