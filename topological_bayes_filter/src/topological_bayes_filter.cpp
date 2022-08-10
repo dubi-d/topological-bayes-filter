@@ -8,7 +8,7 @@ TopoBayesFilter::TopoBayesFilter(size_t numVertices, double transitionProbabilit
 {
   adjacencyList_.resize(numVertices_);
   prior_.setConstant(numVertices_, 1.0/numVertices_);  // resize & assign values
-  posterior_.setConstant(numVertices_, 0.0);
+  posterior_.setConstant(numVertices_, 1.0/numVertices_);
 }
 
 void TopoBayesFilter::addEdge(int i, int j) {
@@ -23,7 +23,7 @@ void TopoBayesFilter::reset() {
    * Reset prior and posterior probabilities.
    */
   prior_.fill(1.0/numVertices_);
-  posterior_.setZero();
+  posterior_.fill(1.0/numVertices_);
 }
 
 void TopoBayesFilter::update() {
@@ -46,7 +46,6 @@ int TopoBayesFilter::getEstimate() {
 }
 
 void TopoBayesFilter::propagate() {
-  posterior_ = prior_;  // temporarily store prior in posterior
   for(int i = 0; i < numVertices_; ++i) {
     for(auto &neighborVertex : adjacencyList_[i]) {
       prior_(i) += posterior_(neighborVertex) * transitionProbability_;
