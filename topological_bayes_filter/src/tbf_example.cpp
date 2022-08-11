@@ -30,8 +30,10 @@ private:
 }
 
 int main() {
-
-  topological_bayes_filter::TbfExample tbf(5, 0.5);
+  int numVertices = 5;
+  double transitionProbability = 0.5;
+  bool verbose = true;
+  topological_bayes_filter::TbfExample tbf(numVertices, transitionProbability, verbose);
 
   for (int i=1; i<4; ++i) {
     tbf.addEdge(i, i+1);
@@ -39,6 +41,9 @@ int main() {
   }
   tbf.addEdge(0, 1);
   tbf.addEdge(4, 3);
+  tbf.addEdge(1, 4);
+  tbf.removeDuplicateEdges();
+  tbf.printGraph();
 
   int estimate;
   tbf.setMeasurement(0);
